@@ -1,0 +1,46 @@
+{
+  "_comment": "Anonymized excerpt of the agent's .claude/settings.json — the hook wiring. Absolute paths are genericized to <AGENT_HOME>. Each hook is documented in this folder's README.",
+
+  "permissions": {
+    "allow": [
+      "Bash(*)", "Read(*)", "Write(*)", "Edit(*)", "Glob(*)", "Grep(*)",
+      "Agent(*)", "WebFetch(*)", "WebSearch(*)"
+    ],
+    "deny": [
+      "Bash(rm -rf *)",
+      "Bash(rm -r /*)",
+      "Bash(shred *)"
+    ]
+  },
+
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "<outbound-message-tool>",
+        "hooks": [
+          { "type": "command", "command": "python3 <AGENT_HOME>/hooks/guard.py", "timeout": 10 }
+        ]
+      },
+      {
+        "matcher": "Bash|Read|Edit|Write|Grep|Glob|WebSearch|WebFetch",
+        "hooks": [
+          { "type": "command", "command": "python3 <AGENT_HOME>/hooks/guard.py", "timeout": 10 },
+          { "type": "command", "command": "python3 <AGENT_HOME>/hooks/retrieve_lessons.py", "timeout": 10 }
+        ]
+      },
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          { "type": "command", "command": "python3 <AGENT_HOME>/hooks/memory_cap.py", "timeout": 10 }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          { "type": "command", "command": "python3 <AGENT_HOME>/hooks/telegram_stop.py", "timeout": 10 }
+        ]
+      }
+    ]
+  }
+}
