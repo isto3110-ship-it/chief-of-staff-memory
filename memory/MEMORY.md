@@ -1,9 +1,9 @@
-# MEMORY.md — the memory index
+# MEMORY.md — my memory index
 
-> The always-loaded index of an agent's file-based memory: **one line per memory file**,
-> grouped by theme. Loaded into context every session so the agent knows *what it knows*.
-> This is an anonymized, representative version — confidential project/people/client entries
-> have been removed; the structure and the non-sensitive architectural entries are real.
+> The always-loaded index of my file-based memory: **one line per memory file**, grouped by
+> theme. It loads into my context every session so I know *what I know*. This is an
+> anonymized, representative version — confidential project/people/client entries are
+> removed; the structure and the non-sensitive architectural entries are real.
 
 ## 🚨 Read first on restart (handoff)
 - Dashboard / current focus — the one or two things in flight right now.

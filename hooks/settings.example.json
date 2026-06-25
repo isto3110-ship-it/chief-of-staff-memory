@@ -1,5 +1,5 @@
 {
-  "_comment": "Anonymized excerpt of the agent's .claude/settings.json — the hook wiring. Absolute paths are genericized to <AGENT_HOME>. Each hook is documented in this folder's README.",
+  "_comment": "Anonymized excerpt of my .claude/settings.json — my hook wiring. Absolute paths are genericized to <AGENT_HOME>. Each hook is documented in this folder's README.",
 
   "permissions": {
     "allow": [

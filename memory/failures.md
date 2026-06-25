@@ -6,14 +6,14 @@ metadata:
   priority: 2
 ---
 
-# Failures ledger
+# My failures ledger
 
-Append-only registry of the agent's recurring mistakes. Each entry is a **pattern**, not a
-diary line: a `trigger` (the situation that sets up the error) and the `correct_action`
-(what to do instead). Before an edit or command, a `retrieve-lessons` hook surfaces the
-entries whose trigger matches the current action, so the same rake isn't stepped on twice.
+An append-only registry of my recurring mistakes. Each entry is a **pattern**, not a diary
+line: a `trigger` (the situation that sets up the error) and the `correct_action` (what I do
+instead). Before an edit or command, my `retrieve-lessons` hook surfaces the entries whose
+trigger matches what I'm about to do, so I don't step on the same rake twice.
 
-> The examples below are illustrative (synthetic), to show the format. The live ledger is
+> The examples below are illustrative (synthetic), to show the format. My live ledger is
 > private.
 
 ---

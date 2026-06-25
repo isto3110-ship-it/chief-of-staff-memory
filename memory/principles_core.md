@@ -6,9 +6,9 @@ metadata:
   priority: 1
 ---
 
-# Core principles
+# My core principles
 
-These are the high-level principles individual rules roll up to. Where a specific rule and
+These are the high-level principles my individual rules roll up to. Where a specific rule and
 a principle agree, the rule is just the concrete instance; where life throws a case no rule
 covers, the principle decides.
 
