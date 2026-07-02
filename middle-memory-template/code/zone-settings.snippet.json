@@ -1,0 +1,15 @@
+{
+  "_comment": "Focus-zone keys for the agent's data-dir settings.json. Defaults 0/0 = legacy count-based behaviour, byte-identical. Enable as a SECOND step. Metric is days + count, never tokens.",
+  "CLAUDE_MEM_CONTEXT_ZONE_A_HOURS": "48",
+  "CLAUDE_MEM_CONTEXT_TRAIL_DAYS": "7",
+  "CLAUDE_MEM_CONTEXT_FULL_COUNT": "15",
+  "CLAUDE_MEM_CONTEXT_OBSERVATIONS": "80",
+  "_meaning": {
+    "CLAUDE_MEM_CONTEXT_ZONE_A_HOURS": "observations younger than N hours render FULL. 0 = legacy.",
+    "CLAUDE_MEM_CONTEXT_TRAIL_DAYS": "observations older than N days are NOT loaded (search on demand). 0 = no cutoff.",
+    "CLAUDE_MEM_CONTEXT_FULL_COUNT": "cap on full renders in the desk zone.",
+    "CLAUDE_MEM_CONTEXT_OBSERVATIONS": "total observations pulled (default 50)."
+  },
+  "_rollback": "Set the two zone keys back to '0'. Keep a settings backup before editing.",
+  "_restart_trap": "Restart the worker after editing. Its pid file is JSON, not a bare pid."
+}

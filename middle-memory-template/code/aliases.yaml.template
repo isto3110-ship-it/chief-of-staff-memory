@@ -1,0 +1,20 @@
+# agent-data/<name>/aliases.yaml — entity core for the middle-memory alias expander.
+# Edited by hand. Degrades softly: a missing/broken file does NOT break the worker.
+# Isolated per data dir. Warm mtime-cached in the long-lived worker.
+# Give EACH agent ONLY its own domain's entities — never copy another agent's list.
+#
+# Format: a list of {canon, type: person|org, aliases: [surface forms]}.
+# Attribute inference matches non-ASCII scripts via Unicode lookarounds (ASCII \b
+# would silently skip them), so localized keywords work too.
+
+entities:
+  - canon: "Principal Name"
+    type: person
+    aliases: ["First", "First Last", "nickname"]
+  - canon: "Primary Org"
+    type: org
+    aliases: ["Org", "Org Inc", "short form"]
+  - canon: "Key Counterparty"
+    type: person
+    aliases: ["Surname", "handle"]
+  # ... keep it tight; it's a booster, not a knowledge base.

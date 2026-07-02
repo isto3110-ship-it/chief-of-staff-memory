@@ -1,0 +1,25 @@
+{
+  "_comment": "Merge these into the agent's Claude Code settings.json 'hooks' object. Replace <FORK> with the path to the claude-mem fork. Inline the per-agent isolation env (<ISO_ENV>) in EVERY command, or a second agent will read the first agent's data dir.",
+  "_ISO_ENV_example": "CLAUDE_MEM_DATA_DIR=$HOME/agent-data/two CLAUDE_MEM_WORKER_PORT=37711 CLAUDE_MEM_CHROMA_PORT=8010 CLAUDE_MEM_QUEUE_REDIS_PREFIX=mem_37711",
+  "_build_gate": "Rebuild the plugin bundle before enabling, so deployed scripts match source.",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|clear|compact",
+        "hooks": [
+          { "type": "command", "command": "<ISO_ENV> CLAUDE_MEM_DURABLE_ENABLED=1 node \"<FORK>/plugin/scripts/bun-runner.js\" \"<FORK>/plugin/scripts/worker-service.cjs\" start; echo '{\"continue\":true,\"suppressOutput\":true}'", "timeout": 60 },
+          { "type": "command", "command": "<ISO_ENV> CLAUDE_MEM_DURABLE_ENABLED=1 node \"<FORK>/plugin/scripts/bun-runner.js\" \"<FORK>/plugin/scripts/worker-service.cjs\" hook claude-code context", "timeout": 60 }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      { "hooks": [ { "type": "command", "command": "<ISO_ENV> CLAUDE_MEM_DURABLE_ENABLED=1 node \"<FORK>/plugin/scripts/bun-runner.js\" \"<FORK>/plugin/scripts/worker-service.cjs\" hook claude-code session-init", "timeout": 60 } ] }
+    ],
+    "PostToolUse": [
+      { "matcher": "*", "hooks": [ { "type": "command", "command": "<ISO_ENV> CLAUDE_MEM_DURABLE_ENABLED=1 node \"<FORK>/plugin/scripts/bun-runner.js\" \"<FORK>/plugin/scripts/worker-service.cjs\" hook claude-code observation", "timeout": 120 } ] }
+    ],
+    "Stop": [
+      { "hooks": [ { "type": "command", "command": "<ISO_ENV> CLAUDE_MEM_DURABLE_ENABLED=1 node \"<FORK>/plugin/scripts/bun-runner.js\" \"<FORK>/plugin/scripts/worker-service.cjs\" hook claude-code summarize", "timeout": 120 } ] }
+    ]
+  }
+}
